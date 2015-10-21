@@ -1,0 +1,18 @@
+@import 'normalize.css';
+@import '@nib-styles/v2-typography';
+@import '@nib-styles/sass-grid/compiled';
+
+.nib-header {
+  padding: 0.5em;
+  color: #fff;
+  text-align: center;
+  background-color: hsl(134, 100%, 29%);
+}
+
+.nib-footer {
+  padding: 0.5em;
+  color: #fff;
+  font-size: 0.8em;
+  text-align: center;
+  background-color: #444;
+}

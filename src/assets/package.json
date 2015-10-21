@@ -1,0 +1,16 @@
+{
+  "name": "react-demo-component",
+  "private": true,
+  "devDependencies": {
+    "phantomjs-polyfill": "0.0.1"
+  },
+  "dependencies": {
+    "@nib-components/react-sass-grid-support": "^0.1.0",
+    "@nib-styles/sass-grid": "^0.3.0",
+    "@nib-styles/v2-typography": "^2.2.0",
+    "normalize.css": "^3.0.3",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "cianca": "^1.1.0"
+  }
+}

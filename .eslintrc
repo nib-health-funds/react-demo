@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "extends": "jameslnewell",
+  "env": {
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "modules": true,
+    "jsx": true
+  }
+}
