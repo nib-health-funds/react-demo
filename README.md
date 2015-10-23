@@ -10,6 +10,8 @@ A demo showing off a Single Page Application and a Form written in React and Flu
 
     npm run build
 
+Then run `npm run serve` and open a browser window.
+
 ## Directory structure
 
     dist/             #all the generated files live here
