@@ -1,8 +1,14 @@
 # react-demo
 
+A demo showing off a Single Page Application and a Form written in React and Flux (Redux).
+
 ## Installation
 
     npm install
+
+## Building
+
+    npm run build
 
 ## Directory structure
 

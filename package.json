@@ -9,6 +9,7 @@
     "del": "^2.0.1",
     "ejs": "^2.3.4",
     "eslint-config-jameslnewell": "^0.0.13",
+    "eslint-plugin-react": "^3.6.3",
     "finder-on-steroids": "^0.3.2",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.1",
@@ -44,8 +45,13 @@
     "readdir": "^0.0.13",
     "run-sequence": "^1.1.0",
     "sass-composer": "2.0.0-beta7",
+    "superstatic": "^3.0.0",
     "uglify-js": "^2.4.20",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "scripts": {
+    "build": "gulp all",
+    "serve": "superstatic dist"
   }
 }

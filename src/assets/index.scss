@@ -16,3 +16,25 @@
   text-align: center;
   background-color: #444;
 }
+
+
+.control {
+  margin-top: 1em;
+}
+
+.control__label {
+  display: block;
+  font-weight: bold;
+}
+
+.control__error {
+  margin: 0;
+  padding: 0.5em;
+  color: #fff;
+  font-size: 12px;
+  background-color: red;
+}
+
+.control.is-valid .control__error {
+  display: none;
+}

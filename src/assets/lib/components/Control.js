@@ -1,37 +1,18 @@
 import React from 'react';
-import TextInput from './TextInput.js';
+import classNames from 'classnames';
 
 export default class extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: props.defaultValue
-    };
-  }
-
-  handleChange(value) {
-    this.setState({
-      value: value
-    });
-  }
-
-  handleBlur() {
-
-  }
-
-  filter() {
-
-  }
-
-  validate() {
-
+  hasError() {
+    return this.props.error && this.props.touched;
   }
 
   render() {
-    return <div className="control">
-      <label htmlFor="abc">{this.props.label}</label>
-      <TextInput defaultValue={this.props.defaultValue}/>
+    const {name, label, ...props} = this.props;
+    return <div className={classNames('control', {'is-valid': !this.hasError(), 'is-invalid': this.hasError()})}>
+      <label className="control__label" htmlFor={name}>{label}</label>
+      <input type="text" name={name} className="control__input" {...props} />
+      <p className="control__error">{this.props.error}</p>
     </div>;
   }
 
