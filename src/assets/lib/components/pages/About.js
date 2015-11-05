@@ -18,19 +18,25 @@ function validate(data) {
     errors.phone = 'Please enter your phone number so we can call you.';
   }
 
+  if (data.email === '') {
+    errors.email = 'Please enter your email address so we can contact you.';
+  }
+
   return errors;
 }
 
 class About extends React.Component {
 
   render() {
+    let {fields: {name, phone, email}, handleSubmit} = this.props;
     return <Layout>
 
-      <h1 className="v2-title v2-title--1">About</h1>
+      <h1 className="v2-title v2-title--1">About You</h1>
 
-      <ControlGroup onSubmit={this.props.handleSubmit}>
-        <Control label="Name" {...this.props.fields.name}/>
-        <Control label="Phone" {...this.props.fields.phone}/>
+      <ControlGroup onSubmit={handleSubmit}>
+        <Control label="Name" {...name}/>
+        <Control label="Phone" {...phone}/>
+        <Control label="Email" {...email}/>
       </ControlGroup>
 
     </Layout>;
@@ -41,7 +47,7 @@ class About extends React.Component {
 export default connect()(
   connectReduxForm({
     form: 'about',
-    fields: ['name', 'phone'],
+    fields: ['name', 'phone', 'email'],
     validate: validate
   })(About)
 );
