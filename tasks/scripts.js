@@ -7,6 +7,7 @@ var source      = require('vinyl-source-stream');
 
 var eslint      = require('gulp-eslint');
 var browserify  = require('browserify');
+var watchify    = require('watchify');
 var uglify      = require('gulp-uglify');
 var KarmaServer = require('karma').Server;
 
@@ -41,6 +42,35 @@ module.exports = function(cfg) {
     };
   }
 
+  /**
+   * Create the bundler
+   * @param   {boolean} [watch]
+   * @returns {browserify|watchify}
+   */
+  function configureBundler(watch) {
+    var options;
+
+    if (watch) {
+      options = Object.assign({}, watchify.args, SCRIPT_OPTIONS);
+    } else {
+      options = SCRIPT_OPTIONS;
+    }
+
+    return browserify(options).transform('babelify');
+  }
+
+  /**
+   * Perform the bunlding
+   * @param   {browserify|watchify} bundler
+   * @returns {stream}
+   */
+  function bundle(bundler) {
+    return bundler.bundle()
+      .pipe(source('bundled.js'))
+      .pipe(gulp.dest(SCRIPT_BUILD_DIR))
+    ;
+  }
+
   /*==================================
    * Clean scripts
    *==================================*/
@@ -66,10 +96,7 @@ module.exports = function(cfg) {
    *==================================*/
 
   gulp.task('scripts.bundle', function() {
-    return browserify(SCRIPT_OPTIONS).transform('babelify').bundle()
-      .pipe(source('bundled.js'))
-      .pipe(gulp.dest(SCRIPT_BUILD_DIR))
-    ;
+    return bundle(configureBundler());
   });
 
   /*==================================
@@ -77,7 +104,18 @@ module.exports = function(cfg) {
    *==================================*/
 
   gulp.task('scripts.watch', function() {
-    gulp.watch(SCRIPT_SRC_GLOB, [/*'scripts.lint', */ 'scripts.bundle']);
+
+    var bundler = watchify(configureBundler(true));
+
+    bundler.on('update', function() {
+      return bundle(bundler);
+    });
+
+    bundler.on('log', console.log);
+
+    return bundle(bundler);
+
+    //gulp.watch(SCRIPT_SRC_GLOB, [/*'scripts.lint', */ 'scripts.bundle']);
   });
 
   /*==================================
