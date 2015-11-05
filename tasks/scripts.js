@@ -67,7 +67,7 @@ module.exports = function(cfg) {
     if (watch) {
       bundler = watchify(bundler);
     } else {
-      bundler = incremental(bundler, {cacheFile: './browserify-cache.json'}); //TODO: move this somewhere?
+      bundler = incremental(bundler, {cacheFile: './browserify-cache.json'}); //TODO: move this somewhere else?
     }
 
     return bundler;
