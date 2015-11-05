@@ -108,10 +108,13 @@ module.exports = function(cfg) {
     var bundler = watchify(configureBundler(true));
 
     bundler.on('update', function() {
+      console.log('bundling scripts...');
       return bundle(bundler);
     });
 
-    bundler.on('log', console.log);
+    bundler.on('time', function(time) {
+      console.log('bundled scripts in '+(time/1000)+'s');
+    });
 
     return bundle(bundler);
 
