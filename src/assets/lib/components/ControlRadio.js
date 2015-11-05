@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export default class extends React.Component {
+export default class ControlRadio extends React.Component {
 
   handleBlur(onBlur, value, name) {
     onBlur({

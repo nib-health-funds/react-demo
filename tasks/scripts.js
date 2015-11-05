@@ -7,6 +7,7 @@ var source      = require('vinyl-source-stream');
 
 var eslint      = require('gulp-eslint');
 var browserify  = require('browserify');
+var incremental = require('browserify-incremental');
 var watchify    = require('watchify');
 var uglify      = require('gulp-uglify');
 var KarmaServer = require('karma').Server;
@@ -47,24 +48,39 @@ module.exports = function(cfg) {
    * @param   {boolean} [watch]
    * @returns {browserify|watchify}
    */
-  function configureBundler(watch) {
-    var options;
+  function createBundler(watch) {
+    var config;
 
     if (watch) {
-      options = Object.assign({}, watchify.args, SCRIPT_OPTIONS);
+      config = Object.assign({}, watchify.args, SCRIPT_OPTIONS);
     } else {
-      options = SCRIPT_OPTIONS;
+      config = Object.assign({}, incremental.args, SCRIPT_OPTIONS);
     }
 
-    return browserify(options).transform('babelify');
+    var bundler = browserify(config)
+      .transform('babelify', {
+        presets: ['es2015', 'react'],
+        plugins: ['transform-object-rest-spread']
+      })
+    ;
+
+    if (watch) {
+      bundler = watchify(bundler);
+    } else {
+      bundler = incremental(bundler, {cacheFile: './browserify-cache.json'}); //TODO: move this somewhere?
+    }
+
+    return bundler;
   }
 
   /**
    * Perform the bunlding
-   * @param   {browserify|watchify} bundler
+   * @param   {browserify}  bundler
+   * @param   {object}      options
    * @returns {stream}
    */
-  function bundle(bundler) {
+  function bundle(bundler, options) {
+    options = options || {};
     return bundler.bundle()
       .pipe(source('bundled.js'))
       .pipe(gulp.dest(SCRIPT_BUILD_DIR))
@@ -96,7 +112,7 @@ module.exports = function(cfg) {
    *==================================*/
 
   gulp.task('scripts.bundle', function() {
-    return bundle(configureBundler());
+    return bundle(createBundler());
   });
 
   /*==================================
@@ -105,7 +121,7 @@ module.exports = function(cfg) {
 
   gulp.task('scripts.watch', function() {
 
-    var bundler = watchify(configureBundler(true));
+    var bundler = watchify(createBundler(true));
 
     bundler.on('update', function() {
       console.log('bundling scripts...');

@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export default class extends React.Component {
+export default class ControlSelect extends React.Component {
 
   hasError() {
     return this.props.error && this.props.touched;

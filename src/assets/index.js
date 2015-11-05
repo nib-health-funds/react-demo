@@ -1,4 +1,4 @@
-require('@nib-components/react-sass-grid-support');
+//require('@nib-components/react-sass-grid-support');
 
 import React from 'react';
 import {render} from 'react-dom';

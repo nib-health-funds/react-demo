@@ -10,8 +10,9 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          //cacheDirectory: '',
-          presets: ['react', 'es2015']
+          //cacheDirectory: '/tmp',
+          presets: ['es2015', 'react'],
+          plugins: ['transform-object-rest-spread']
         }
       }
     ]

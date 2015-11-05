@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class extends React.Component {
+export default class Footer extends React.Component {
 
   getYear() {
     var now = new Date();
