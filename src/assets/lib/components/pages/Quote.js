@@ -14,4 +14,4 @@ export default class Quote extends React.Component {
   }
 }
 
-export default connect()(Quote);
+export default connect(state => state)(Quote);
