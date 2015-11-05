@@ -80,7 +80,7 @@ module.exports = function(cfg) {
    * @returns {stream}
    */
   function bundle(bundler, options) {
-    options = options || {};
+    options = options || {}; //TODO: handle errors
     return bundler.bundle()
       .pipe(source('bundled.js'))
       .pipe(gulp.dest(SCRIPT_BUILD_DIR))
