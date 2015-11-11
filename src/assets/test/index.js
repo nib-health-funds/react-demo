@@ -1,8 +1,8 @@
-var assert = require('assert');
+import assert from 'assert';
 
-describe('frontend', function() {
+describe('frontend', () => {
 
-  it('should pass', function() {
+  it('should pass', () => {
     assert(true);
   });
 

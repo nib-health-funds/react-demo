@@ -3,7 +3,7 @@ import React from 'react';
 export default class Footer extends React.Component {
 
   getYear() {
-    var now = new Date();
+    const now = new Date();
     return now.getFullYear();
   }
 

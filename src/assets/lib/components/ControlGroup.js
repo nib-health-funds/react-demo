@@ -7,9 +7,15 @@ export default class ControlGroup extends React.Component {
   }
 
   render() {
-    return <form className="control-group">
-      {this.props.children}
-    </form>;
+    return (
+      <form className="control-group">
+        {this.props.children}
+      </form>
+    );
   }
 
 }
+
+ControlGroup.propTypes = {
+  children: React.PropTypes.node.isRequired
+};

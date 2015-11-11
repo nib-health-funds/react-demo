@@ -1,14 +1,13 @@
 {
   "root": true,
-  "extends": "jameslnewell",
   "env": {
-    "es6": true
+    "browser": true,
+    "commonjs": true,
+    "mocha": true
   },
-  "ecmaFeatures": {
-    "modules": true,
-    "jsx": true
+  "rules": {
+    "import/no-unresolved": 0, //unable to resolve path in parent node_modules
+    "import/no-duplicates": 0 //'null' imported multiple times???
   },
-  "plugins": [
-    "react"
-  ]
+  "extends": "jameslnewell/react"
 }

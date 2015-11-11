@@ -3,7 +3,13 @@ import classNames from 'classnames';
 
 export default class ControlRadio extends React.Component {
 
-  handleBlur(onBlur, value, name) {
+  constructor() {
+    super();
+    this.handleBlur = this.handleBlur.bind(this);
+  }
+
+  handleBlur() {
+    const {onBlur, value, name} = this.props;
     onBlur({
       target: {
         value,
@@ -17,22 +23,41 @@ export default class ControlRadio extends React.Component {
   }
 
   render() {
-    const {name, label, options, onBlur, value: selectedValue, ...props} = this.props;
+    const {name, label, options, ...props} = this.props;
+
+    const controlClassName = classNames(
+      'control', {
+        'is-valid': !this.hasError(),
+        'is-invalid': this.hasError()
+      }
+    );
+
     return (
-      <div className={classNames('control', {'is-valid': !this.hasError(), 'is-invalid': this.hasError()})}>
+      <div className={controlClassName}>
         <label className="control__label">
           {label}
         </label>
-        {Object.keys(options).map(key => {
-          return (
+        {Object.keys(options).map(key => (
             <label className="control__label" key={key}>
-              <input type="radio" name={name} className="control__input" {...props} value={key} onBlur={() => this.handleBlur(onBlur, selectedValue)} />
+              <input {...props} type="radio" name={name} className="control__input" value={key}
+                onBlur={this.handleBlur}
+              />
               {options[key]}
             </label>
-          )
-        })}
+        ))}
         <p className="control__error">{this.props.error}</p>
       </div>
     );
   }
 }
+
+
+ControlRadio.propTypes = {
+  name: React.PropTypes.string.isRequired,
+  label: React.PropTypes.string.isRequired,
+  error: React.PropTypes.string,
+  options: React.PropTypes.object,
+  touched: React.PropTypes.bool,
+  value: React.PropTypes.string,
+  onBlur: React.PropTypes.func
+};

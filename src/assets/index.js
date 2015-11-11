@@ -15,7 +15,7 @@ import Home from './lib/components/pages/Home.js';
 import About from './lib/components/pages/About.js';
 import Quote from './lib/components/pages/Quote.js';
 
-let store = createStore(app);
+const store = createStore(app);
 
 render(
   <Provider store={store}>
