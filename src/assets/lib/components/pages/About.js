@@ -1,13 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {connectReduxForm} from 'redux-form';
+import Form from '@nib-components/react-form';
 
 import validate from '../../validate';
 import Layout from '../partials/Layout';
-import Control from '../Control';
-import ControlGroup from '../ControlGroup';
-import ControlSelect from '../ControlSelect';
-import ControlRadio from '../ControlRadio';
 
 class About extends React.Component {
 
@@ -18,13 +15,29 @@ class About extends React.Component {
 
         <h1 className="v2-title v2-title--1">About You</h1>
 
-        <ControlGroup onSubmit={handleSubmit}>
-          <ControlSelect label="Title" options={{'': 'empty', mr: 'Mr', mrs: 'Mrs'}} {...title}/>
-          <Control label="Name" {...name}/>
-          <Control label="Phone" {...phone}/>
-          <Control label="Email" {...email}/>
-          <ControlRadio label="Gender" options={{male: 'Male', female: 'Female'}} {...gender}/>
-        </ControlGroup>
+        <Form theme="grey" onSubmit={handleSubmit}>
+
+          <Form.Control label="Title">
+            <Form.Select options={{'': 'empty', mr: 'Mr', mrs: 'Mrs'}} {...title}/>
+          </Form.Control>
+
+          <Form.Control label="Name">
+            <Form.Text {...name}/>
+          </Form.Control>
+
+          <Form.Control label="Phone">
+            <Form.Text {...phone}/>
+          </Form.Control>
+
+          <Form.Control label="Email">
+            <Form.Text {...email}/>
+          </Form.Control>
+
+          <Form.Control label="Gender">
+            <Form.RadioGroup options={{male: 'Male', female: 'Female'}} {...gender}/>
+          </Form.Control>
+
+        </Form>
 
       </Layout>
     );

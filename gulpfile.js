@@ -33,7 +33,7 @@ gulp.task('optimise', function(done) {
 });
 
 gulp.task('watch', function(done) {
-  sequence(["packages.watch","scripts.watch","styles.watch","content.watch"], done);
+  sequence(["scripts.watch","styles.watch","content.watch"], done);
 });
 
 gulp.task('default', function(done) {

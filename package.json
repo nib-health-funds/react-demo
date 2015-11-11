@@ -12,7 +12,8 @@
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
     "redux": "^3.0.3",
-    "redux-form": "^2.4.5"
+    "redux-form": "^2.4.5",
+    "@nib-components/react-form": "^0.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.2",
@@ -51,14 +52,27 @@
     "phantomjs-polyfill": "0.0.1",
     "readdir": "^0.0.13",
     "run-sequence": "^1.1.0",
-    "sass-composer": "2.0.0-beta9",
+    "sass-composer": "2.0.0-beta11",
     "superstatic": "^3.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.0"
   },
   "browserify": {
-    "transform": [["babelify",{"presets":["es2015","react"],"plugins":["transform-object-rest-spread"]}]]
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015",
+            "react"
+          ],
+          "plugins": [
+            "transform-object-rest-spread"
+          ]
+        }
+      ]
+    ]
   },
   "scripts": {
     "build": "gulp all",
