@@ -52,6 +52,7 @@
     "readdir": "^0.0.13",
     "run-sequence": "^1.1.0",
     "sass-composer": "2.0.0-beta9",
+    "superstatic": "^3.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.0"
@@ -60,6 +61,7 @@
     "transform": [["babelify",{"presets":["es2015","react"],"plugins":["transform-object-rest-spread"]}]]
   },
   "scripts": {
-    "babel": "babel src/assets/index.js --presets es2015,react"
+    "build": "gulp all",
+    "start": "superstatic dist"
   }
 }
