@@ -1,6 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {connectReduxForm} from 'redux-form';
+import {decorator} from 'the-other-redux-form';
 import Form from '@nib-components/react-form';
 
 import validate from '../../validate';
@@ -9,32 +8,30 @@ import Layout from '../partials/Layout';
 class About extends React.Component {
 
   render() {
-    const {fields: {title, name, phone, email, gender}, handleSubmit} = this.props;
+    const {fields: {title, name, phone, email, gender}, onSubmit} = this.props;
     return (
       <Layout>
 
-        <h1 className="v2-title v2-title--1">About You</h1>
+        <Form theme="green" title="About You" onSubmit={onSubmit}>
 
-        <Form theme="grey" onSubmit={handleSubmit}>
-
-          <Form.Control label="Title">
-            <Form.Select options={{'': 'empty', mr: 'Mr', mrs: 'Mrs'}} {...title}/>
+          <Form.Control label="Title" {...title}>
+            <Form.Select options={{'': 'empty', mr: 'Mr', mrs: 'Mrs'}}/>
           </Form.Control>
 
-          <Form.Control label="Name">
-            <Form.Text {...name}/>
+          <Form.Control label="Name" {...name}>
+            <Form.Text/>
           </Form.Control>
 
-          <Form.Control label="Phone">
-            <Form.Text {...phone}/>
+          <Form.Control label="Phone" {...phone}>
+            <Form.Text/>
           </Form.Control>
 
-          <Form.Control label="Email">
-            <Form.Text {...email}/>
+          <Form.Control label="Email" {...email}>
+            <Form.Text/>
           </Form.Control>
 
-          <Form.Control label="Gender">
-            <Form.RadioGroup options={{male: 'Male', female: 'Female'}} {...gender}/>
+          <Form.Control name="gender" label="Gender" {...gender}>
+            <Form.RadioGroup name="gender" options={{male: 'Male', female: 'Female'}}/>
           </Form.Control>
 
         </Form>
@@ -47,14 +44,12 @@ class About extends React.Component {
 
 About.propTypes = {
   fields: React.PropTypes.object.isRequired,
-  handleSubmit: React.PropTypes.func.isRequired
+  onSubmit: React.PropTypes.func.isRequired
 };
 
-export default connect()(
-  connectReduxForm({
-    form: 'about',
-    fields: ['title', 'name', 'phone', 'email', 'gender'],
-    validate
-  })(About)
-);
+export default decorator({
+  form: 'about',
+  fields: ['title', 'name', 'phone', 'email', 'gender'],
+  validate
+})(About);
 

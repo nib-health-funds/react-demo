@@ -6,7 +6,8 @@ import {render} from 'react-dom';
 import {Route} from 'cianca';
 import {Router} from 'cianca';
 
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 
 import app from './lib/reducers';
@@ -15,7 +16,7 @@ import Home from './lib/components/pages/Home.js';
 import About from './lib/components/pages/About.js';
 import Quote from './lib/components/pages/Quote.js';
 
-const store = createStore(app);
+const store = applyMiddleware(thunk)(createStore)(app);
 
 render(
   <Provider store={store}>

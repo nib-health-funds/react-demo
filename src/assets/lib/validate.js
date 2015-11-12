@@ -1,31 +1,38 @@
 
 /**
  * Validate the form
- * @param   {object} values
- * @returns {object}
+ * @param   {string} fieldName
+ * @param   {string} fieldValue
+ * @returns {boolean|string}
  */
-export default function(values) { //TODO: use a validation package
-  const errors = {};
+export default function(fieldName, fieldValue) { //TODO: use a validation package
+console.log('validate', fieldName, fieldValue)
+  switch (fieldName) {
 
-  if (values.title === '') {
-    errors.title = 'Please choose your title.';
+    case 'title':
+      if (fieldValue === '') return 'Please choose your title.';
+      break;
+
+    case 'name':
+      if (fieldValue === '') return 'Please enter your name so we can personalise your experience.';
+      break;
+
+    case 'phone':
+      if (fieldValue === '') return 'Please enter your phone number so we can call you.';
+      break;
+
+    case 'email':
+      if (fieldValue === '') return 'Please enter your email address so we can contact you.';
+      break;
+
+    case 'gender':
+      if (fieldValue === '') return 'Please choose your gender.';
+      break;
+
+    default:
+      return 'Unknown field.';
+
   }
 
-  if (values.name === '') {
-    errors.name = 'Please enter your name so we can personalise your experience.';
-  }
-
-  if (values.phone === '') {
-    errors.phone = 'Please enter your phone number so we can call you.';
-  }
-
-  if (values.email === '') {
-    errors.email = 'Please enter your email address so we can contact you.';
-  }
-
-  if (values.gender === '') {
-    errors.gender = 'Please choose your gender.';
-  }
-
-  return errors;
+  return true;
 }
