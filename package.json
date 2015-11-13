@@ -2,7 +2,7 @@
   "name": "react-demo",
   "private": true,
   "dependencies": {
-    "@nib-components/react-form": "0.0.6",
+    "@nib-components/react-form": "^0.1.2",
     "@nib-components/react-sass-grid-support": "^0.1.0",
     "@nib-styles/sass-grid": "^0.3.0",
     "@nib-styles/v2-typography": "^2.2.0",

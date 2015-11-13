@@ -6,7 +6,7 @@
  * @returns {boolean|string}
  */
 export default function(fieldName, fieldValue) { //TODO: use a validation package
-console.log('validate', fieldName, fieldValue)
+
   switch (fieldName) {
 
     case 'title':
@@ -26,7 +26,9 @@ console.log('validate', fieldName, fieldValue)
       break;
 
     case 'gender':
+      console.log(fieldValue);
       if (fieldValue === '') return 'Please choose your gender.';
+      if (fieldValue === 'male') return 'Please choose a better gender.';
       break;
 
     default:
