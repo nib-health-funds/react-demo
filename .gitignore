@@ -1,6 +1,6 @@
 Thumbs.db,
 .DS_Store,
 .idea,
-npm-debug.log,
+npm-debug.log
 node_modules/
 dist/
