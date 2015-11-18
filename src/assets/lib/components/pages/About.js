@@ -8,7 +8,7 @@ import Layout from '../partials/Layout';
 class About extends React.Component {
 
   render() {
-    const {fields: {title, name, phone, email, gender}, onSubmit} = this.props;
+    const {form: {fields: {title, name, phone, email, gender}, onSubmit}} = this.props;
     return (
       <Layout>
 
@@ -43,8 +43,7 @@ class About extends React.Component {
 }
 
 About.propTypes = {
-  fields: React.PropTypes.object.isRequired,
-  onSubmit: React.PropTypes.func.isRequired
+  form: React.PropTypes.object.isRequired
 };
 
 export default decorator({
