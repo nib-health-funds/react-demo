@@ -1,6 +1,4 @@
-var path = require('path');
 var gulp = require('gulp');
-var mkdirp = require('mkdirp');
 var sequence = require('run-sequence');
 var source = require('vinyl-source-stream');
 
@@ -10,36 +8,20 @@ var browserify = require('browserify');
 var incremental = require('browserify-incremental');
 var watchify = require('watchify');
 var uglify = require('gulp-uglify');
-var KarmaServer = require('karma').Server;
 
-var package = require('../package.json');
+var package = require('../../package.json');
 
 module.exports = function(cfg) {
 
-  var SCRIPT_SRC_DIR = cfg.srcdir + '/assets';
+  var SCRIPT_SRC_DIR = cfg.assetsdir;
   var SCRIPT_BUILD_DIR = cfg.distdir;
 
   var SCRIPT_SRC_FILE = SCRIPT_SRC_DIR + '/index.js';
   var SCRIPT_BUILD_FILE = SCRIPT_BUILD_DIR + '/bundled.js';
 
   var SCRIPT_SRC_GLOB = [
-    '!' + SCRIPT_SRC_DIR + '/node_modules/**/*.js', '!' + SCRIPT_SRC_DIR + '/**/node_modules/**/*.js', //ignore scripts from node_modules
     SCRIPT_SRC_DIR + '/*.js', SCRIPT_SRC_DIR + '/**/*.js' //include our scripts
   ];
-
-  var SCRIPT_TESTS_GLOB = [
-    '!' + SCRIPT_SRC_DIR + '/node_modules/**/*.js', '!' + SCRIPT_SRC_DIR + '/**/node_modules/**/*.js', //ignore scripts from node_modules
-    SCRIPT_SRC_DIR + '/**/test/**/*.js' //include our scripts
-  ];
-
-  var SCRIPT_LINT_OPTIONS = null;
-
-  //in development: allow `console`, `debugger` and other statements for debugging purposes
-  if (!cfg.production) {
-    SCRIPT_LINT_OPTIONS = {
-      configFile: 'jameslnewell/debug'
-    };
-  }
 
   /**
    * Create the bundler
@@ -114,6 +96,15 @@ module.exports = function(cfg) {
    * Lint scripts
    *==================================*/
 
+  var SCRIPT_LINT_OPTIONS = null;
+
+  //in development: allow `console`, `debugger` and other statements for debugging purposes
+  if (!cfg.production) {
+    SCRIPT_LINT_OPTIONS = {
+      configFile: 'jameslnewell/debug'
+    };
+  }
+
   gulp.task('scripts.lint', function() {
     return gulp.src(SCRIPT_SRC_GLOB)
       .pipe(eslint(SCRIPT_LINT_OPTIONS))
@@ -159,65 +150,6 @@ module.exports = function(cfg) {
       logger.log('bundling scripts...');
       return createBundle(bundler);
     });
-  });
-
-  /*==================================
-   * Test scripts
-   *==================================*/
-
-  var istanbul = require('browserify-istanbul');
-
-  gulp.task('scripts.test', function(done) {
-    var reportsDirectory = path.resolve(cfg.distdir) + '/__reports__';
-    mkdirp(reportsDirectory, function(err) {
-      if (err) return done(err);
-      var server = new KarmaServer({
-
-        configFile: __dirname+'/../karma.conf.js',
-        singleRun: true,
-
-        reporters: ['dots', 'bamboo', 'coverage'],
-        browsers: ['PhantomJS'],
-
-        browserify: {
-          debug:      true,
-          transform:  package.browserify.transform.concat([istanbul()])
-        },
-
-        coverageReporter: {
-          dir: reportsDirectory + '/coverage',
-          reporters: [
-            { type: 'html' },
-            { type: 'text-summary' }
-          ]
-        },
-
-        bambooReporter: {
-          filename: reportsDirectory + '/mocha.json'
-        }
-
-      }, function(exitCode) {
-        done(exitCode ? new Error('Test failed.') : null);
-      });
-      server.start();
-    });
-  });
-
-  gulp.task('scripts.debug', function(done) {
-    var server = new KarmaServer({
-
-      configFile: __dirname+'/../karma.conf.js',
-      singleRun:  false,
-
-      browserify: {
-        debug:      true,
-        transform:  package.browserify.transform
-      }
-
-    }, function(exitCode) {
-      done(exitCode ? new Error('Test failed.') : null);
-    });
-    server.start();
   });
 
   /*==================================

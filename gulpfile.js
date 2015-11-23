@@ -1,12 +1,18 @@
-var gulp        = require('gulp');
-var path        = require('path');
-var readdir     = require('readdir');
-var sequence    = require('run-sequence');
+var gulp = require('gulp');
+var path = require('path');
+var readdir = require('readdir');
+var sequence = require('run-sequence');
 
 var cfg = {
+
   production: process.argv.indexOf('all') !== -1,
+
   srcdir: './src',
-  distdir: './dist'
+  distdir: './dist',
+
+  assetsdir: './src/assets',
+  reportsdir: './dist/__reports__'
+
 };
 
 //load gulp tasks
@@ -24,8 +30,8 @@ gulp.task('test', function(done) {
   sequence("scripts.test", done);
 });
 
-gulp.task('debug', function(done) {
-  sequence("scripts.debug", done);
+gulp.task('test.watch', function(done) {
+  sequence("scripts.test.watch", done);
 });
 
 gulp.task('optimise', function(done) {
@@ -41,5 +47,5 @@ gulp.task('default', function(done) {
 });
 
 gulp.task('all', function(done) {
-  sequence("clean", "build", ["test","optimise"], done);
+  sequence("clean", "build", "test", "optimise", done);
 });

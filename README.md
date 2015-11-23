@@ -9,6 +9,7 @@
     dist/             #all the generated files live here
       bundled.css       #the bundled styles
       bundled.js        #the bundled scripts
+      index.html        #the content files
       __reports__/
         mocha.json        #the test results for consumption by Bamboo
         coverage/
@@ -23,7 +24,7 @@
           index.js
 
       content/          #all the content files live here e.g. <img>s and other assets used by HTML but not the styles and scripts
-        ...
+        index.html
 
     tasks/            #all the gulp tasks live here
 
@@ -69,13 +70,13 @@ Run this task when you want to re-bundle styles and scripts from a clean slate.
 
     gulp test
 
-Run all the tests in PhantomJS.
+Run all the tests.
 
-#### debug
+#### test.watch
 
-    gulp debug
+    gulp test.watch
 
-Run a test server so you can debug the tests in the browser.
+Run all the tests whenever the tests or code changes.
 
 #### optimise
 

@@ -9,7 +9,7 @@ var watcher = require('sass-composer/lib/watcher');
 
 module.exports = function(cfg) {
 
-  var STYLE_SRC_DIR = cfg.srcdir + '/assets';
+  var STYLE_SRC_DIR = cfg.assetsdir;
   var STYLE_BUILD_DIR = cfg.distdir;
 
   var STYLE_SRC_FILE = STYLE_SRC_DIR + '/index.scss';

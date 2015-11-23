@@ -1,9 +1,9 @@
-import assert from 'assert';
+import {expect} from 'chai';
 
 describe('frontend', () => {
 
   it('should pass', () => {
-    assert(true);
+    expect(true).to.be.equal(true);
   });
 
 });
