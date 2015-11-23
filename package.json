@@ -8,6 +8,8 @@
     "@nib-styles/v2-typography": "^2.2.0",
     "cianca": "^1.1.0",
     "classnames": "^2.2.0",
+    "express": "^4.13.3",
+    "nodemon": "^1.8.1",
     "normalize.css": "^3.0.3",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
@@ -59,10 +61,14 @@
     "watchify": "^3.6.0"
   },
   "browserify": {
-    "transform": [["babelify"]]
+    "transform": [
+      [
+        "babelify"
+      ]
+    ]
   },
   "scripts": {
     "build": "gulp all",
-    "start": "superstatic dist"
+    "start": "nodemon server.js"
   }
 }
