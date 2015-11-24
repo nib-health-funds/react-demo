@@ -1,10 +1,8 @@
 
 import React from 'react';
-
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
-
 import {Route, Router} from 'cianca';
 
 import app from './lib/reducers';
@@ -12,7 +10,6 @@ import app from './lib/reducers';
 import Home from './lib/components/pages/Home.js';
 import About from './lib/components/pages/About.js';
 import Quote from './lib/components/pages/Quote.js';
-import Footer from './lib/components/partials/Footer.js';
 
 export default class App extends React.Component {
 

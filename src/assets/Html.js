@@ -1,6 +1,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/server';
+import Helmet from 'react-helmet';
 
 export default class Server extends React.Component {
 
@@ -10,10 +11,12 @@ export default class Server extends React.Component {
     const state = JSON.stringify(store ? store.getState() : {});
     const content = component ? ReactDOM.renderToString(component) : '';
 
+    const head = Helmet.rewind() || {title: ''};
+
     return (
       <html>
         <head>
-          <title>React Demo</title>
+          <title>{head.title.toString()}</title>
           <meta charSet="UTF-8"/>
           <link rel="stylesheet" href="bundled.css"/>
         </head>
