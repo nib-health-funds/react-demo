@@ -11,12 +11,12 @@ export default class Server extends React.Component {
     const state = JSON.stringify(store ? store.getState() : {});
     const content = component ? ReactDOM.renderToString(component) : '';
 
-    const head = Helmet.rewind() || {title: ''};
+    const head = Helmet.rewind();
 
     return (
       <html>
         <head>
-          <title>{head.title.toString()}</title>
+          {head.title.toComponent()}
           <meta charSet="UTF-8"/>
           <link rel="stylesheet" href="bundled.css"/>
         </head>

@@ -1,5 +1,6 @@
 import React from 'react';
 import {decorator} from 'the-other-redux-form';
+import Helmet from 'react-helmet';
 import Form from '@nib-components/react-form';
 
 import validate from '../../validate';
@@ -11,6 +12,8 @@ class About extends React.Component {
     const {form: {fields: {title, name, phone, email, gender}, onSubmit}} = this.props;
     return (
       <Layout>
+
+        <Helmet title="About"/>
 
         <Form theme="green" title="About You" onSubmit={onSubmit}>
 
