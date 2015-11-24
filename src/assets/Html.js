@@ -14,6 +14,7 @@ export default class Server extends React.Component {
       <html>
         <head>
           <title>React Demo</title>
+          <meta charSet="UTF-8"/>
           <link rel="stylesheet" href="bundled.css"/>
         </head>
         <body>
