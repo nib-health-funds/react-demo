@@ -24,6 +24,6 @@ Quote.propTypes = {
   name: React.PropTypes.string.isRequired
 };
 
-export default prefetch(options => console.log('prefetch quote!', options))(connect(state => state)(
+export default prefetch(() => String('prefetch quote!'))(connect(state => state)(
   Quote
 ));

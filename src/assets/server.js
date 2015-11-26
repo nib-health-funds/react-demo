@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import {getPrefetchedData} from 'react-fetcher';
 import {Provider} from 'react-redux';
-import {match, RoutingContext} from 'react-router'
+import {match, RoutingContext} from 'react-router';
 
 import createStore from './lib/createStore';
 import routes from './lib/routes';
@@ -12,13 +12,13 @@ import Html from './lib/components/Html';
 
 const app = express();
 
-app.use(express.static(__dirname + '/../../dist'));
+app.use(express.static(`${__dirname}/../../dist`));
 
-app.use((req, res, next) => {
+app.use((req, res) => {
 
   const store = createStore();
 
-  match({routes, location: req.url}, function(err, redirect, props) {
+  match({routes, location: req.url}, (err, redirect, props) => {
 
     if (err) {
       return res
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 
     if (redirect) {
       return res
-        .redirect(302, redirect.pathname + redirect.search)
+        .redirect(302, `${redirect.pathname}${redirect.search}`)
       ;
     }
 
@@ -41,26 +41,26 @@ app.use((req, res, next) => {
     }
 
     getPrefetchedData(props.components, {}, {})
-      .then((fetchedData) => {
+      .then(() => {
+
+        const elements = (
+          <Html store={store}>
+            <Provider store={store}>
+              <RoutingContext {...props} />
+            </Provider>
+          </Html>
+        );
 
         res
           .status(200)
-          .end(
-            '<!doctype html>'
-            + ReactDOM.renderToStaticMarkup(
-            <Html store={store}>
-              <Provider store={store}>
-                <RoutingContext {...props} />
-              </Provider>
-            </Html>
-          )
-        );
+          .end(`<!doctype html>${ReactDOM.renderToStaticMarkup(elements)}`)
+        ;
 
       })
-      .catch(err => {
-        console.log(err);
+      .catch(prefetchErr => {
+        //console.log(err);
         res.status(500);
-        res.end(err);
+        res.end(prefetchErr);
 
       })
     ;
@@ -69,8 +69,8 @@ app.use((req, res, next) => {
 
 });
 
-const server = app.listen(3111, 'localhost', () => {
-  const host = server.address().address;
-  const port = server.address().port;
-  console.log('App running at http://%s:%s', host, port);
+app.listen(3111, 'localhost', () => {
+  //const host = server.address().address;
+  //const port = server.address().port;
+  //console.log('App running at http://%s:%s', host, port);
 });

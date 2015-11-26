@@ -3,7 +3,7 @@ import React from 'react';
 import {renderToString} from 'react-dom/server';
 import Helmet from 'react-helmet';
 
-export default class Html extends React.Component {
+class Html extends React.Component {
 
   render() {
     const {store, children} = this.props;
@@ -30,3 +30,10 @@ export default class Html extends React.Component {
   }
 
 }
+
+Html.propTypes = {
+  store: React.PropTypes.object.isRequired,
+  children: React.PropTypes.node.isRequired
+};
+
+export default Html;
