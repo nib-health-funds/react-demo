@@ -1,22 +1,22 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom/server';
+import {renderToString} from 'react-dom/server';
 import Helmet from 'react-helmet';
 
-export default class Server extends React.Component {
+export default class Html extends React.Component {
 
   render() {
-    const {store, component} = this.props;
+    const {store, children} = this.props;
 
     const state = JSON.stringify(store ? store.getState() : {});
-    const content = component ? ReactDOM.renderToString(component) : '';
+    const content = children ? renderToString(children) : '';
 
     const head = Helmet.rewind();
 
     return (
       <html>
         <head>
-          {head.title.toComponent()}
+          {head && head.title && head.title.toComponent()}
           <meta charSet="UTF-8"/>
           <link rel="stylesheet" href="bundled.css"/>
         </head>

@@ -18,10 +18,10 @@
     src/              #all the source files live here
 
       assets/           #all the style, script and related files live here
-        index.js          #the script entry file where you should write/require your code
+        client.js          #the script entry file where you should write/require your code
         index.scss        #the style entry file where you should write/require your code
         test/             #the script tests live here
-          index.js
+          client.js
 
       content/          #all the content files live here e.g. <img>s and other assets used by HTML but not the styles and scripts
         index.html

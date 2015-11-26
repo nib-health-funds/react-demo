@@ -5,5 +5,9 @@
     "commonjs": true,
     "mocha": true
   },
-  "extends": "jameslnewell/react"
+  "parser": "babel-eslint",
+  "extends": "jameslnewell/react",
+  "rules": {
+    "import/no-named-as-default": 0
+  }
 }

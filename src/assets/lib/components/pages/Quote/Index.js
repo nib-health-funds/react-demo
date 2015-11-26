@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {prefetch} from 'react-fetcher';
 import Helmet from 'react-helmet';
 
-import Layout from '../partials/Layout';
+import Layout from '../../partials/Layout';
 
 class Quote extends React.Component {
   render() {
@@ -23,4 +24,6 @@ Quote.propTypes = {
   name: React.PropTypes.string.isRequired
 };
 
-export default connect(state => state)(Quote);
+export default prefetch(options => console.log('prefetch quote!', options))(connect(state => state)(
+  Quote
+));

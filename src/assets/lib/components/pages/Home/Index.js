@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
 
-import Layout from '../partials/Layout';
+import Layout from '../../partials/Layout';
 
 class Home extends React.Component {
   render() {

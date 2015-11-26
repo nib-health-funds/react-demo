@@ -16,7 +16,7 @@ module.exports = function(cfg) {
   var SCRIPT_SRC_DIR = cfg.assetsdir;
   var SCRIPT_BUILD_DIR = cfg.distdir;
 
-  var SCRIPT_SRC_FILE = SCRIPT_SRC_DIR + '/index.js';
+  var SCRIPT_SRC_FILE = SCRIPT_SRC_DIR + '/client.js';
   var SCRIPT_BUILD_FILE = SCRIPT_BUILD_DIR + '/bundled.js';
 
   var SCRIPT_SRC_GLOB = [

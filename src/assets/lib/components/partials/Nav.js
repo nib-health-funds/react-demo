@@ -1,28 +1,15 @@
 import React from 'react';
-import {Link} from 'cianca';
+import {IndexLink, Link} from 'react-router';
 
 export default class Nav extends React.Component {
 
   render() {
     return (
       <ul className="nib-nav">
-        {this.context.router.routes.map(route => {
-          if (route.name) {
-            return (
-              <li className="nib-nav__item" key={route.name}>
-                <Link name={route.name} className="nib-nav__link">{route.title || route.name}</Link>
-              </li>
-            );
-          }
-          return null;
-        })}
+        <li><IndexLink to="/">Home</IndexLink></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/quote">Quote</Link></li>
       </ul>
     );
   }
 }
-
-Nav.contextTypes = {
-  router: React.PropTypes.object.isRequired
-};
-
-

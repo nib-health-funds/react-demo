@@ -1,5 +1,9 @@
 import {combineReducers} from 'redux';
-import {reducer} from 'the-other-redux-form';
+import {reducer as formReducer} from 'the-other-redux-form';
+import {routeReducer} from 'redux-simple-router';
 
-export default combineReducers({form: reducer});
+export default combineReducers({
+  form: formReducer,
+  routing: routeReducer
+});
 

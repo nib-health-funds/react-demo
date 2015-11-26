@@ -3,13 +3,14 @@ import {decorator} from 'the-other-redux-form';
 import Helmet from 'react-helmet';
 import Form from '@nib-components/react-form';
 
-import validate from '../../validate';
-import Layout from '../partials/Layout';
+import validate from './validate';
+import Layout from '../../partials/Layout';
 
 class About extends React.Component {
 
   render() {
     const {form: {fields: {title, name, phone, email, gender}, onSubmit}} = this.props;
+
     return (
       <Layout>
 
