@@ -2,38 +2,39 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import Helmet from 'react-helmet';
+import rev from 'rev-manifest-path';
 
-class Html extends React.Component {
+const assetPath = rev({manifest: './dist/rev-manifest.json'});
 
-  render() {
-    const {store, children} = this.props;
+/**
+ * The HTML
+ * @class
+ */
+function html({state, children}) {
 
-    const state = JSON.stringify(store ? store.getState() : {});
-    const content = children ? renderToString(children) : '';
+  const head = Helmet.rewind();
+  const content = children && renderToString(children);
 
-    const head = Helmet.rewind();
-
-    return (
-      <html>
-        <head>
-          {head && head.title && head.title.toComponent()}
-          <meta charSet="UTF-8"/>
-          <link rel="stylesheet" href="bundled.css"/>
-        </head>
-        <body>
-          <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
-          <script dangerouslySetInnerHTML={{__html: `window.__state__=${state}`}}/>
-          <script src="bundled.js"></script>
-        </body>
-      </html>
-    );
-  }
+  return (
+    <html>
+      <head>
+        {head && head.title && head.title.toComponent()}
+        <meta charSet="UTF-8"/>
+        <link rel="stylesheet" href={assetPath('bundled.css')}/>
+      </head>
+      <body>
+        <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
+        <script dangerouslySetInnerHTML={{__html: `window.__state__=${state}`}}/>
+        <script src={assetPath('bundled.js')}></script>
+      </body>
+    </html>
+  );
 
 }
 
-Html.propTypes = {
-  store: React.PropTypes.object.isRequired,
+html.propTypes = {
+  state: React.PropTypes.object.isRequired,
   children: React.PropTypes.node.isRequired
 };
 
-export default Html;
+export default html;

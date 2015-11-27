@@ -44,7 +44,7 @@ app.use((req, res) => {
       .then(() => {
 
         const elements = (
-          <Html store={store}>
+          <Html state={store.getState()}>
             <Provider store={store}>
               <RoutingContext {...props} />
             </Provider>
