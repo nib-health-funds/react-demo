@@ -1,3 +1,4 @@
+import '@nib-components/react-sass-grid-support';
 
 import express from 'express';
 import React from 'react';

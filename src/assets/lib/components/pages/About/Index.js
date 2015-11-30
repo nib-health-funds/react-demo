@@ -16,29 +16,33 @@ class About extends React.Component {
 
         <Helmet title="About"/>
 
-        <Form theme="green" title="About You" onSubmit={onSubmit}>
+        <div g-xs="my2" g-md="my3" g-lg="my4 mx4">
 
-          <Form.Control label="Title" {...title}>
-            <Form.Select options={{'': 'empty', mr: 'Mr', mrs: 'Mrs'}}/>
-          </Form.Control>
+          <Form theme="green" title="About You" onSubmit={onSubmit}>
 
-          <Form.Control label="Name" {...name}>
-            <Form.Text/>
-          </Form.Control>
+            <Form.Control label="Title" {...title}>
+              <Form.Select options={{'': 'empty', mr: 'Mr', mrs: 'Mrs'}}/>
+            </Form.Control>
 
-          <Form.Control label="Phone" {...phone}>
-            <Form.Text/>
-          </Form.Control>
+            <Form.Control label="Name" {...name}>
+              <Form.Text/>
+            </Form.Control>
 
-          <Form.Control label="Email" {...email}>
-            <Form.Text/>
-          </Form.Control>
+            <Form.Control label="Phone" {...phone}>
+              <Form.Text/>
+            </Form.Control>
 
-          <Form.Control name="gender" label="Gender" {...gender}>
-            <Form.RadioGroup name="gender" options={{male: 'Male', female: 'Female'}}/>
-          </Form.Control>
+            <Form.Control label="Email" {...email}>
+              <Form.Text/>
+            </Form.Control>
 
-        </Form>
+            <Form.Control name="gender" label="Gender" {...gender}>
+              <Form.RadioGroup name="gender" options={{male: 'Male', female: 'Female'}}/>
+            </Form.Control>
+
+          </Form>
+
+        </div>
 
       </Layout>
     );

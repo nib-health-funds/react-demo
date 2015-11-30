@@ -20,11 +20,12 @@ function html({state, children}) {
       <head>
         {head && head.title && head.title.toComponent()}
         <meta charSet="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href={assetPath('bundled.css')}/>
       </head>
       <body>
         <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
-        <script dangerouslySetInnerHTML={{__html: `window.__state__=${state}`}}/>
+        <script dangerouslySetInnerHTML={{__html: `window.__state__=${JSON.stringify(state)}`}}/>
         <script src={assetPath('bundled.js')}></script>
       </body>
     </html>
