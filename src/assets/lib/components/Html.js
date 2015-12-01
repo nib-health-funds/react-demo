@@ -16,7 +16,7 @@ function html({state, children}) {
   const content = children && renderToString(children);
 
   return (
-    <html>
+    <html className="flexbox">
       <head>
         {head && head.title && head.title.toComponent()}
         <meta charSet="UTF-8"/>
