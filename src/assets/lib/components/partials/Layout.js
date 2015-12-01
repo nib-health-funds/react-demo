@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '@nib-components/react-header-small';
+import Footer from '@nib-components/react-footer-small';
 import Nav from './Nav';
 
 class Layout extends React.Component {
